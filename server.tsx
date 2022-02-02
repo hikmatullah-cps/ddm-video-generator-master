@@ -45,8 +45,7 @@
 				 const thumb_video = thumb_comps.find((c) => c.id === compositionId);
 				 if (!thumb_video) {
 					 throw new Error(`No thumb_video called ${compositionId}`);
-				 }
-				 
+				 } 
 				 const thumb_tmpDir = await fs.promises.mkdtemp(
 					 path.join(`C:/Users/user/Downloads/-thumbnail-${req.query.wordText}`)
 				 );
@@ -90,7 +89,7 @@
 						 if (f % 10 === 0) {
 							 console.log(`Rendered frame ${f}`);
 						 }
-					 },
+					 }, 
 					 parallelism: null,
 					 outputDir: tmpDir,
 					 inputProps: req.query,
