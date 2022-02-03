@@ -40,7 +40,7 @@ const  Video_Form: React.FC <{
           method: 'GET',
           redirect: 'follow'
         }; 
-        fetch(`http://localhost:8000/?titleColor=${wcolor.replace('#', '%23')}&wordText=${word}&definitionText=${definition}&bgColor=${dcolor.replace('#', '%23')}&formate=${formatValue}`, requestOptions)
+        fetch(`https://text-return-to-video.herokuapp.com/?titleColor=${wcolor.replace('#', '%23')}&wordText=${word}&definitionText=${definition}&bgColor=${dcolor.replace('#', '%23')}&formate=${formatValue}`, requestOptions)
           .then(response => response.json())
           .then((result ?:any ) => {
                 setVideoUrl(result.video_url)
