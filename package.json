@@ -6,7 +6,8 @@
   },
 	"description": "My Remotion video",
 	"scripts": {
-		"start": "remotion preview src/Markup.tsx && ts-node server.tsx",
+        
+		"start": "node server",
 		"build": "remotion render src/index.tsx CompId out/video.mp4",
 		"upgrade": "remotion upgrade",
 		"server": "ts-node server.tsx",
