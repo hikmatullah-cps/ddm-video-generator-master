@@ -6,5 +6,4 @@ dist
 out
 .env
 client/node_modules
-client/public
-client/src
+
