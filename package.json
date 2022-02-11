@@ -1,18 +1,13 @@
 {
 	"name": "remotion-template",
 	"version": "1.0.0",
-    "engines": {
-    "node": "14.18.1"
-  },
+	"engines": {
+		"node": "14.18.1"
+	},
 	"description": "My Remotion video",
 	"scripts": {
-        
-		"start": "node server",
-		"build": "remotion render src/index.tsx CompId out/video.mp4",
-		"upgrade": "remotion upgrade",
-		"server": "ts-node server.tsx",
-		"dev": "concurrently \"npm run server\" \"npm start\"",
-		"test": "eslint src --ext ts,tsx,js,jsx && tsc"
+		  "start": "ts-node server.tsx",   
+		  "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
 	},
 	"repository": {},
 	"license": "UNLICENSED",

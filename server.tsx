@@ -12,18 +12,22 @@
 	 stitchFramesToVideo,
  } from '@remotion/renderer';
  import express from 'express';
- import fs from 'fs';
- import os from 'os';
+ import fs from 'fs'; 
  import path from 'path';
- const cors= require('cors')
+ const cors = require('cors')
 
  const app = express();
  const port = process.env.PORT || 8000;
  const compositionId = 'CompId';
  
  const cache = new Map<string, string>();
- 
- app.get('/', async (req, res) => {
+ const nodeEnv :any = "local"
+if(nodeEnv=="developement"){
+ app.use(express.static('client/build'))  
+}
+const publicDir = path.join(__dirname,'/public'); 
+app.use(express.static(publicDir));  
+ app.get('/server', async (req, res) => {
 	 res.set('Access-Control-Allow-Origin', '*')
 	 const sendFile = (file: string) => {
 		 fs.createReadStream(file)
@@ -47,7 +51,7 @@
 					 throw new Error(`No thumb_video called ${compositionId}`);
 				 } 
 				 const thumb_tmpDir = await fs.promises.mkdtemp(
-					 path.join(`C:/Users/user/Downloads/-thumbnail-${req.query.wordText}`)
+					 path.join(`public/thumbnails/${req.query.wordText}`)
 				 );
 			 const thumbFinalOutput = path.join(thumb_tmpDir, 'element-0.jpeg'); 
 					 await renderFrames({
@@ -67,7 +71,7 @@
 				 });
 				 cache.set(JSON.stringify(req.query), thumbFinalOutput); 
 				 sendFile(thumbFinalOutput); 
-				 res.status(200).json({video_url:`${thumbFinalOutput}`})
+				 res.status(200).json({video_url:`/${thumbFinalOutput}`})
 				 console.log('thumbnail rendered and sent!'); 
 		 } else if(req.query.formate=='video'){
 			 console.log('you run video')
@@ -79,7 +83,7 @@
 				 }
 				  
 				 const tmpDir = await fs.promises.mkdtemp(
-					 path.join(`C:/Users/user/Downloads/videos-${req.query.wordText}`)
+					 path.join(`public/videos/${req.query.wordText}`)
 				 );
 				 const {assetsInfo} = await renderFrames({
 					 config: video,
@@ -122,7 +126,7 @@
 			 //	fs.unlink(tmpDir, (e)=>console.log('remove extra file'))
 				 console.log('Video rendered and sent!'); 
 				 res.status(200).json({video_url:`${finalOutput}`})
-		 }
+		   }
 		 
 	 } catch (err) {
 		 console.error(err);
