@@ -21,7 +21,7 @@
  const compositionId = 'CompId';
  
  const cache = new Map<string, string>();
- const nodeEnv :any = "local"
+ const nodeEnv :any = "developement"
 if(nodeEnv=="developement"){
  app.use(express.static('client/build'))  
 }
