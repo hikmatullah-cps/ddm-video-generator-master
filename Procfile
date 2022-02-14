@@ -1,1 +1,1 @@
-web: gunicorn
+web:node server.tsx
